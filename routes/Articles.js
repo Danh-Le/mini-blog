@@ -14,39 +14,39 @@ app.get("/", (req, res) => {
   });
 });
 
-// app.get("/:slug", (req, res) => {
-//   fs.readFile("./article.json", (err, data) => {
-//     if (err) {
-//       console.log(err);
-//       return;
-//     } else {
-//       const articles = JSON.parse(data.toString());
-//       const findedArticle = articles.find((article) => {
-//         return article.slug === req.params.slug;
-//       });
-//       res.json(findedArticle);
-//     }
-//   });
-// });
+app.get("/:slug", (req, res) => {
+  fs.readFile("./article.json", (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      const articles = JSON.parse(data.toString());
+      const findedArticle = articles.find((article) => {
+        return article.slug === req.params.slug;
+      });
+      res.json(findedArticle);
+    }
+  });
+});
 
-// app.post("/", (req, res) => {
-//   const newArticle = { ...req.body };
-//   fs.readFile("./article.json", (err, data) => {
-//     if (err) {
-//       console.log(err);
-//       return;
-//     } else {
-//       const articles = JSON.parse(data.toString());
-//       articles.push(newArticle);
-//       fs.writeFile("./article.json", JSON.stringify(articles), (err) => {
-//         if (err) {
-//           console.log(err);
-//           return;
-//         } else {
-//           res.json(newArticle);
-//         }
-//       });
-//     }
-//   });
-// });
+app.post("/", (req, res) => {
+  const newArticle = { ...req.body };
+  fs.readFile("./article.json", (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      const articles = JSON.parse(data.toString());
+      articles.push(newArticle);
+      fs.writeFile("./article.json", JSON.stringify(articles), (err) => {
+        if (err) {
+          console.log(err);
+          return;
+        } else {
+          res.json(newArticle);
+        }
+      });
+    }
+  });
+});
 module.exports = app;
